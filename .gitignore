@@ -1,0 +1,27 @@
+# Local environments and Python caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Local secrets and machine-specific files
+.kaggle/
+.env
+.env.*
+
+# Raw downloaded mirrors are redundant with the processed, versioned dataset
+data/raw/
+
+# Regenerable archives and logs outside the canonical run log
+*.zip
+*.tar.gz
+*.log
+
+# Training/runtime caches
+.cache/
+wandb/
+
+# Colab/runtime artifacts
+/content/

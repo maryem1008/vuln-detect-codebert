@@ -1,0 +1,4 @@
+# Large finalized dataset artifacts are versioned through Git LFS
+data/processed/*.jsonl filter=lfs diff=lfs merge=lfs -text
+# Future CodeBERT checkpoints and metrics may also be large
+models/codebert/** filter=lfs diff=lfs merge=lfs -text

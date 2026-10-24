@@ -1,0 +1,39 @@
+{
+  "dataset": "DetectVul/devign",
+  "source_splits": {
+    "train": 21854,
+    "validation": 2732,
+    "test": 2732
+  },
+  "raw_count_before_deduplication": 27318,
+  "deduplicated_count": 25917,
+  "near_duplicate_rows_removed": 1401,
+  "deduplication_method": "SHA-256 of whitespace-normalized code with comments, strings, and non-keyword identifiers normalized",
+  "near_duplicate_threshold": "exact match after identifier normalization (conservative hash-based approximation)",
+  "split_method": "stratified random split after deduplication",
+  "split_ratios": {
+    "train": 0.8,
+    "validation": 0.1,
+    "test": 0.1
+  },
+  "seed": 42,
+  "split_counts": {
+    "train": 20733,
+    "validation": 2592,
+    "test": 2592
+  },
+  "split_label_counts": {
+    "train": {
+      "0": 11204,
+      "1": 9529
+    },
+    "validation": {
+      "0": 1400,
+      "1": 1192
+    },
+    "test": {
+      "0": 1401,
+      "1": 1191
+    }
+  }
+}

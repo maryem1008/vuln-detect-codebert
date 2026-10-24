@@ -1,0 +1,25 @@
+{
+  "dataset": "DetectVul/devign",
+  "raw_rows": 27318,
+  "deduplicated_rows": 25917,
+  "class_balance_raw": {
+    "0": 14858,
+    "1": 12460
+  },
+  "class_balance_deduplicated": {
+    "0": 14005,
+    "1": 11912
+  },
+  "code_length_characters": {
+    "min": 26,
+    "max": 142346,
+    "mean": 2023.9647119115602,
+    "median": 937.0,
+    "p95": 6893.0
+  },
+  "project_counts": {
+    "FFmpeg": 9769,
+    "qemu": 17549
+  },
+  "cwe_type_frequency": {}
+}
