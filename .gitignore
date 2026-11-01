@@ -25,3 +25,6 @@ wandb/
 
 # Colab/runtime artifacts
 /content/
+
+# Temporary CodeBERT smoke-test checkpoints are large and regenerable
+reports/codebert_diagnostics/smoke_model/

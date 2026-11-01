@@ -1,0 +1,33 @@
+{
+  "classifier_parameter_names": [
+    "classifier.dense.weight",
+    "classifier.dense.bias",
+    "classifier.out_proj.weight",
+    "classifier.out_proj.bias"
+  ],
+  "classifier_parameter_count": 592130,
+  "classifier_trainable": true,
+  "classifier_in_optimizer": true,
+  "optimizer_class": "AdamW",
+  "optimizer_parameter_groups": [
+    {
+      "group": 0,
+      "learning_rate": 2e-05,
+      "weight_decay": 0.01,
+      "parameter_count": 77,
+      "contains_classifier": true
+    },
+    {
+      "group": 1,
+      "learning_rate": 2e-05,
+      "weight_decay": 0.0,
+      "parameter_count": 124,
+      "contains_classifier": true
+    }
+  ],
+  "configured_learning_rate": 2e-05,
+  "initial_optimizer_learning_rates": [
+    2e-05,
+    2e-05
+  ]
+}

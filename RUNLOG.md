@@ -612,3 +612,27 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 - Export command: zip -r -q /home/ubuntu/vuln-detect-codebert_export.zip vuln-detect-codebert (run from /home/ubuntu; wrapped single top-level folder).
 - Archive verification passed: src/train_codebert.py, all three processed JSONL files, splits.json, notebook, and baseline results are present.
 - Full export completed: 2026-10-24T20:15:17+00:00
+
+## CodeBERT training diagnostics patch
+- Added explicit classifier trainability and optimizer inclusion assertions.
+- Added configured/effective learning-rate diagnostics, raw label checks, raw logits/prediction samples, and loss-curve artifacts.
+- TrainingArguments now explicitly sets optim=adamw_torch, lr_scheduler_type=linear, learning_rate=2e-5, warmup_ratio=0.1, label_names=[labels], and metric_for_best_model=eval_loss.
+- Command: python src/train_codebert.py --diagnostics-only
+- Diagnostics exposed a missing local Trainer dependency: accelerate was absent from the original requirements despite Transformers 5.20.2 requiring accelerate>=1.1.0.
+- Installed accelerate and regenerated requirements.txt; the Colab notebook already installs it defensively.
+
+## CodeBERT debugging results
+- Diagnostics confirmed raw labels vary in all splits and remain present after tokenization via labels=[...].
+- The newly initialized classifier head is trainable and present in both AdamW optimizer groups: classifier.dense and classifier.out_proj, 592,130 parameters.
+- Effective initial optimizer learning rate is 2e-5 in both groups; linear scheduling and warmup steps are logged per epoch.
+- The original diagnostics pass exposed and fixed an environment gap: accelerate>=1.1.0 was required by Transformers 5.20.2 Trainer and was added to requirements.txt.
+- Three-epoch smoke test on 64 train / 32 validation / 32 test examples completed in 132 seconds. Train loss: 0.7290 -> 0.6902 -> 0.6928. Validation loss: 0.6864 -> 0.6731 -> 0.6841. Logged learning rates: 1.545e-5 -> 8.182e-6 -> 9.091e-7.
+- Full Colab fine-tuning was not rerun in this sandbox.
+
+## Larger CodeBERT smoke test — stop condition
+- Run: 1,500 training examples, 500 validation examples, 500 test examples, one epoch, batch size 8.
+- Estimated steps: 188; warmup_steps: 18 (10% of this smoke run).
+- Runtime: 844.9 seconds CPU.
+- Aggregate train_loss: 0.6946537748; validation loss: 0.6819711924; test loss: 0.6922714114.
+- Test metrics: precision 0.4750, recall 0.0819, F1 0.1397, ROC-AUC 0.50735.
+- Predictions were non-constant, but the loss remained near ln(2) and ROC-AUC was near random. This does not pass the requested learning criterion; do not start the full Colab retrain yet.
